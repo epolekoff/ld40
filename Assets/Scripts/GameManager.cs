@@ -86,6 +86,8 @@ public class GameManager : Singleton<GameManager>, IStateMachineEntity
         GameTimer = 0;
         GameActive = true;
         GameTimerActive = true;
+
+        AudioManager.Instance.PlayBell();
     }
 
     /// <summary>

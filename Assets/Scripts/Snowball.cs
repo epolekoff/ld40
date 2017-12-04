@@ -88,6 +88,11 @@ public class Snowball : MonoBehaviour {
                 ShrinkVertices(col.contacts[i].point);
             }
             m_verticesUnaffectedByHeat = new List<int>();
+            AudioManager.Instance.PlayHeat();
+        }
+        if (col.gameObject.layer == LayerMask.NameToLayer("Tree"))
+        {
+            AudioManager.Instance.PlayTreeThud();
         }
     }
 
@@ -115,6 +120,7 @@ public class Snowball : MonoBehaviour {
         {
             HitMine(col.transform.position);
             Destroy(col.gameObject);
+            AudioManager.Instance.PlayPop();
         }
     }
 
@@ -170,6 +176,8 @@ public class Snowball : MonoBehaviour {
                 vertices[i] += fromCenterLocalSpace.normalized * SnowpatchVertexGrowRate * ratio * Time.deltaTime;
             }
         }
+
+        AudioManager.Instance.PlaySnowSound();
 
         Mesh.vertices = vertices;
     }
